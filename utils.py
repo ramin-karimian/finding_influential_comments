@@ -1,21 +1,52 @@
 import pandas as pd
 import pickle
 import numpy as np
+from multiprocessing import Process, Manager
 
-
-def load_data(datapath):
+# def load_data(datapath,extension=True):
+#     with open(datapath, "rb") as f:
+#         df = pickle.load(f)
+#     if extension:
+#         data = list(df["tokens"])
+#         return data, df
+#     else:
+#         return df
+def load_data(datapath,extention=False,article="total"):
     with open(datapath, "rb") as f:
         df = pickle.load(f)
-    data = list(df["tokens"])
-    return data, df
+    if article == "total":
+        if extention == "tokens":
+            data = list(df["tokens"])
+            return data, df
+        elif extention == "topics":
+            data = list(df["topic_distribution"])
+            data = [[y[1] for y in x] for x in data]
+            return data, df
+        else:
+            return df
+    elif article=="one_article":
+        ID = df["articleID"][0]
+        df = df[df["articleID"]==ID]
+        if extention == "tokens":
+            data = df["tokens"]
+            return data, df
+        elif extention == "topics":
+            data = list(df["topic_distribution"])
+            data = [[y[1] for y in x] for x in data]
+            return data, df
+        else:
+            return df
 
+def check_print(i):
+    if i%1000==0:
+        print(i)
 
-def load_data_topics(datapath):
-    with open(datapath, "rb") as f:
-        df = pickle.load(f)
-        data = list(df["topic_distribution"])
-        data = [[y[1] for y in x] for x in data]
-    return data, df
+# def load_data_topics(datapath):
+#     with open(datapath, "rb") as f:
+#         df = pickle.load(f)
+#         data = list(df["topic_distribution"])
+#         data = [[y[1] for y in x] for x in data]
+#     return data, df
 
 
 def save_data(datapath, data):
@@ -59,3 +90,18 @@ def word2idx(data):
             if y not in w2i.keys():
                 w2i[y] = len(w2i) + 1
     return w2i
+
+def multi_process(g,func,funcList,argList=None):
+    processes=[]
+    manager= Manager()
+    return_dict = manager.dict()
+    # for n in list(g.nodes()): return_dict[n]={}
+
+    for f in funcList:
+        p=Process(target=func,args=(g,f,return_dict))
+        processes.append(p)
+        p.start()
+    for p in processes:
+        p.join()
+    # print(return_dict)
+    return return_dict

@@ -2,8 +2,8 @@ import os
 from utils import *
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
-datapath="pickles/preprocessed_data.pkl"
-_, df = load_data(datapath)
+datapath="data/preprocessed_data.pkl"
+df = load_data(datapath)
 
 if __name__=="__main__":
     sentiment=SentimentIntensityAnalyzer()
@@ -15,6 +15,6 @@ if __name__=="__main__":
         score=sentiment.polarity_scores(" ".join(df["tokens"][i]))
         df["neg_polarity"][i],df["neu_polarity"][i], df["pos_polarity"][i],df["total_compound_polarity"][i]= score.values()
     # df["polarity"] = df["tokens"].apply(lambda x: sentiment.polarity_scores(" ".join(x)))
-    df.to_excel("pickles/preprocessed_data(polarity_added).xlsx")
-    save_data("pickles/preprocessed_data(polarity_added).pkl",df)
+    df.to_excel("data/preprocessed_data(polarity_added).xlsx")
+    save_data("data/preprocessed_data(polarity_added).pkl",df)
 

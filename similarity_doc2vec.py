@@ -32,10 +32,10 @@ def assess_model(model,train_corpus):
     print(ac)
     return cn , ac , first_ranks , second_ranks
 
-def sims(model,corpus):
+def similarity(model,corpus):
     data = [model.infer_vector(x.words) for x in corpus]
-    res = cosine_similarity(data,data)
-    return res
+    sim = cosine_similarity(data,data)
+    return sim
 
 if __name__=="__main__":
     assess=False
@@ -44,16 +44,16 @@ if __name__=="__main__":
     confiq={"vector_size":20,
         "min_count":2,
         "epochs":10}
-    datapath="pickles/preprocessed_data(polarity_added).pkl"
+    datapath="data/preprocessed_data(polarity_added).pkl"
     dirname = "my_doc2vec_model"
     path = f"models\\"+dirname
     if dirname not in os.listdir("models"):
         os.mkdir(path)
     fname = path+f"\\my_doc2vec_model_vec{confiq['vector_size']}_epochs{confiq['epochs']}"
-    _, df = load_data(datapath)
-    train_corpus=[TaggedDocument(df["tokens"][i],[i]) for i in range(int(0.9*len(df)))]
-    test_corpus=[TaggedDocument(df["tokens"][i],[i]) for i in range(int(0.9*len(df)),len(df))]
-    corpus= [TaggedDocument(df["tokens"][i],[i]) for i in range(len(df))]
+    df = load_data(datapath,article="one_article")
+    train_corpus=[TaggedDocument(df["tokens"][i],[df["commentID"][i]]) for i in range(int(0.9*len(df)))]
+    test_corpus=[TaggedDocument(df["tokens"][i],[df["commentID"][i]]) for i in range(int(0.9*len(df)),len(df))]
+    corpus= [TaggedDocument(df["tokens"][i],[df["commentID"][i]]) for i in range(len(df))]
     if assess:
 
         model = model(confiq)
@@ -73,9 +73,10 @@ if __name__=="__main__":
         print("training started")
         model.train(corpus,total_examples=model.corpus_count,epochs=model.epochs)
         print("training finished")
-        res = sims(model,corpus)
+        sims = similarity(model,corpus)
+        sims=pd.DataFrame(sims,index = df["commentID"], columns= df["commentID"])
         with open(fname+"_cosine_similarities.pkl","wb") as f:
-            pickle.dump(res,f)
-            # pd.DataFrame(res).to_csv(fname[:-4]+".csv")
+            pickle.dump(sims,f)
+            sims.to_csv(fname[:-4]+"_cosine_similarities.csv")
     else:
         model = Doc2Vec.load(fname)

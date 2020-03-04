@@ -3,3 +3,5 @@ pickles/*
 models/*
 .idea/*
 __pycache__/*
+report
+backup

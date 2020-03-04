@@ -26,17 +26,19 @@ def similarity(data):
     return sims
 
 if __name__=="__main__":
-    confiq={"num_topics":600}
+    confiq={"num_topics":30}
     modelName = f"lda_model_{confiq['num_topics']}"
     dirname=f"models/{modelName}"
     filename=f"/{modelName}"
     datapath= dirname+filename+".pkl"
     fname=dirname+filename+"_topical_similarities.pkl"
 
-    data, df = load_data_topics(datapath)
+    data, df = load_data(datapath,extention="topics",article="one_article")
+    # data, df = load_data(datapath,extention="topics")
     data = [[i,np.array(x).reshape(1,-1)] for i,x in enumerate(data)]
     # data = data[:5]
     sims = similarity(data)
+    sims=pd.DataFrame(sims,index = df["commentID"], columns= df["commentID"])
     with open(fname,"wb") as f:
         pickle.dump(sims,f)
-        # pd.DataFrame(sims).to_csv(fname[:-4]+".csv")
+        sims.to_csv(fname[:-4]+".csv")
