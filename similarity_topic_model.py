@@ -33,8 +33,8 @@ if __name__=="__main__":
     datapath= dirname+filename+".pkl"
     fname=dirname+filename+"_topical_similarities.pkl"
 
-    data, df = load_data(datapath,extention="topics",article="one_article")
-    # data, df = load_data(datapath,extention="topics")
+    # data, df = load_data(datapath,extention="topics",article="one_article")
+    data, df = load_data(datapath,extention="topics")
     data = [[i,np.array(x).reshape(1,-1)] for i,x in enumerate(data)]
     # data = data[:5]
     sims = similarity(data)

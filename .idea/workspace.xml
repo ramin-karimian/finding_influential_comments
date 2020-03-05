@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4b0aab86-7ebd-4d13-9ec0-8c5ccce8b09f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polarity.py" beforeDir="false" afterPath="$PROJECT_DIR$/polarity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polarity_results.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/similarity_doc2vec.py" beforeDir="false" afterPath="$PROJECT_DIR$/similarity_doc2vec.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/similarity_topic_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/similarity_topic_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/similarity_word2vec.py" beforeDir="false" afterPath="$PROJECT_DIR$/similarity_word2vec.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/topic_modeling.py" beforeDir="false" afterPath="$PROJECT_DIR$/topic_modeling.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/network.py" beforeDir="false" afterPath="$PROJECT_DIR$/network.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

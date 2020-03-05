@@ -62,8 +62,8 @@ if __name__=="__main__":
     filename=f"/{modelName}"
     savepath = dirname+filename+".pkl"
 
-    common_texts, df = load_data(datapath,extention='tokens',article="one_article")
-    # common_texts, df = load_data(datapath,extention='tokens')
+    # common_texts, df = load_data(datapath,extention='tokens',article="one_article")
+    common_texts, df = load_data(datapath,extention='tokens')
     lda , common_corpus, common_dictionary = lda_model(confiq,common_texts,confiq['limit'])
     df = prepare_result(lda, df, common_corpus, confiq["num_topics"])
     df1, df2 = prepare_excel_output(df,lda,confiq["num_topics"],confiq["num_words"])

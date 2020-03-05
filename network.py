@@ -1,10 +1,12 @@
 import networkx as nx
 import itertools
+from time import time as tm
 from utils import *
 from networkx.algorithms.community.centrality import girvan_newman
 from networkx.algorithms.community import  greedy_modularity_communities , label_propagation_communities
 
 def create_network(data,threshold):
+    t1=tm()
     g = nx.Graph()
     c = 0
     # for i in range(len(data)):
@@ -15,18 +17,21 @@ def create_network(data,threshold):
             th = data[i][j]
             if th >= threshold:
                 g.add_edge(i,j,th=th)
+    print(f"network creation took {tm()-t1} s")
     return g
 
 def func(g,f,return_dict):
+    t1 =tm()
     res = f(g)
     d={}
     for k,v in list(res.items()):
         d[k]=v
-    print(f.__name__)
+    print(f.__name__ , f" took {tm()-t1} s")
     return_dict[f.__name__]=d
 
 def modify(return_dict):
-    data = load_data("data/preprocessed_data(polarity_added).pkl",article="one_article")
+    # data = load_data("data/preprocessed_data(polarity_added).pkl",article="one_article")
+    data = load_data("data/preprocessed_data(polarity_added).pkl")
     data_dict={}
     for n in list(g.nodes()): data_dict[n]={}
     for i in return_dict.keys():
@@ -43,31 +48,19 @@ def modify(return_dict):
 
 def community_detection_1(g,return_dict):
     centrality_communities = girvan_newman(g, most_valuable_edge=None)
-    # com = greedy_modularity_communities(g)
-    # com = list(com)
-    # for i in range(len(com)):
-    #     for j in range(len(com[i])):
-    #         return_dict[j]["greedy_modularity_communities"] = i
-    # modularity_communities = label_propagation_communities(g)
-    # return centrality_communities ,modularity_communities
     return centrality_communities
-    # return com, return_dict
 
 def community_detection(g,return_dict):
     # centrality_communities = girvan_newman(g, most_valuable_edge=None)
-    att_name = greedy_modularity_communities.__name__
+    t1=tm()
     com = greedy_modularity_communities(g)
     com = list(com)
-    att={}
     for i in range(len(com)):
         for j in com[i]:
             return_dict[j]["greedy_modularity_communities"] = i
-            att[j]=i
-
     # com = label_propagation_communities(g)
-    # return centrality_communities ,modularity_communities
-    # return centrality_communities
-    return com , return_dict , att , att_name
+    print(greedy_modularity_communities.__name__,f" took {tm()-t1} s")
+    return com , return_dict
 
 def func_community(g,f,return_dict):
     res = f(g)
@@ -78,19 +71,14 @@ def func_community(g,f,return_dict):
         1
     return_dict[f.__name__]=res
 
-# def create_net_file(g,d,att_name,savepath):
-#     nx.set_node_attributes(g,d,att_name)
-#     nx.write_gexf(g,savepath[:-4]+".gexf")
-
 def create_net_file(g,return_dict,savepath):
     for i,k in return_dict.items():
         for ii,kk in k.items():
             g.nodes[i][ii]=kk
-    # nx.set_node_attributes(g,d,att_name)
     nx.write_gexf(g,savepath[:-4]+".gexf")
 
 if __name__ == "__main__":
-    mode=["create_network","community_detection"][1]
+    mode=["create_network","community_detection"][0]
     threshold= 0.5
     # name="doc2vec"
     # datapath = "models/my_doc2vec_model/my_doc2vec_model_vec20_epochs10_cosine_similarities.pkl"
@@ -107,6 +95,8 @@ if __name__ == "__main__":
         # data=data[:10]
         g = create_network(data,threshold)
         print(len(g.edges()))
+        print(f"order:\n betweenness={(len(g.edges())*len(g.nodes())*5*(10**(-7)))/3600} h")
+        print(f"order:\n greedy_modularity_communities={((len(g.edges())**3)*5*(10**(-7)))/3600} h")
         funcList=[nx.degree_centrality,nx.clustering,
                   nx.closeness_centrality, nx.betweenness_centrality,
                   nx.pagerank, nx.eigenvector_centrality_numpy,
@@ -117,18 +107,17 @@ if __name__ == "__main__":
         pd.DataFrame(return_dict).transpose().to_excel(savepath[:-4]+".xlsx")
     elif mode=="community_detection":
         return_dict,g = load_data(savepath)
-        # nx.write_gexf(g,savepath[:-4]+".gexf")
-        funcList=[girvan_newman,
-                  greedy_modularity_communities,
-                  label_propagation_communities
-                   ]
-        # res_dict = multi_process(g,func_community,funcList)
-
-        com , return_dict, att , att_name= community_detection(g,return_dict)
+        print(f"order:\n greedy_modularity_communities={((len(g.edges())**3)*5*(10**(-7)))/3600} h")
+        com , return_dict= community_detection(g,return_dict)
         save_data(savepath,[return_dict,g])
         pd.DataFrame(return_dict).transpose().to_excel(savepath[:-4]+".xlsx")
-        # com = community_detection(g,return_dict)
-        # save_data(savepath,[return_dict,g])
-        # pd.DataFrame(return_dict).transpose().to_excel(savepath[:-4]+".xlsx")
-        # create_net_file(g,att,att_name,savepath)
         create_net_file(g,return_dict,savepath)
+        # funcList=[girvan_newman,
+        #           greedy_modularity_communities,
+        #           label_propagation_communities
+        #            ]
+        # res_dict = multi_process(g,func_community,funcList)
+
+        # com = community_detection(g,return_dict)
+
+
