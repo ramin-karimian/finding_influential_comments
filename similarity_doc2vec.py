@@ -1,10 +1,8 @@
-import gensim
-import numpy as np
 from gensim.models.doc2vec import Doc2Vec,TaggedDocument
 import collections
 import os
 from sklearn.metrics.pairwise import cosine_similarity
-from utils import *
+from backup.scripts.utils import *
 
 
 

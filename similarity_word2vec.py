@@ -1,6 +1,5 @@
-import numpy as np
 import os
-from utils import *
+from backup.scripts.utils import *
 from sklearn.metrics.pairwise import cosine_similarity
 
 def similarity(data):

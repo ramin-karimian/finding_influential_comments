@@ -1,11 +1,7 @@
-import numpy as np
-import pandas as pd
-import pickle
 import os
 from gensim.corpora.dictionary import Dictionary
-from gensim.models.ldamodel import LdaModel
 from gensim.models import LdaMulticore
-from utils import *
+from backup.scripts.utils import *
 
 
 def lda_model(confiq,common_texts,limit):
@@ -48,22 +44,23 @@ def prepare_excel_output(df,lda,num_topics,num_words):
 
 if __name__=="__main__":
     datapath="data/preprocessed_data(polarity_added).pkl"
-    confiq={"num_topics":30,
-        "num_cores":5,
+    confiq={"num_topics":50,
+        "oneOrTotal" : ["one_article","total"][0],
+        "num_cores":8,
         "alpha":1e-5,
         "eta":5e-1,
         "minimum_probability":0.0,
         "num_words":40,
         "limit":0.1}
 
-    modelName=f"lda_model_{confiq['num_topics']}"
+    modelName=f"lda_model_{confiq['num_topics']}_{confiq['oneOrTotal']}"
     dirname=f"models/{modelName}"
     os.mkdir(dirname)
     filename=f"/{modelName}"
     savepath = dirname+filename+".pkl"
 
     # common_texts, df = load_data(datapath,extention='tokens',article="one_article")
-    common_texts, df = load_data(datapath,extention='tokens')
+    common_texts, df = load_data(datapath,extention='tokens', article=confiq["oneOrTotal"])
     lda , common_corpus, common_dictionary = lda_model(confiq,common_texts,confiq['limit'])
     df = prepare_result(lda, df, common_corpus, confiq["num_topics"])
     df1, df2 = prepare_excel_output(df,lda,confiq["num_topics"],confiq["num_words"])

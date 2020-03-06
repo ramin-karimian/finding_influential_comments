@@ -1,5 +1,4 @@
-import os
-from utils import *
+from backup.scripts.utils import *
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 datapath="data/preprocessed_data.pkl"
