@@ -1,6 +1,7 @@
 import pandas as pd
 import pickle
 import numpy as np
+from time import time as tm
 
 def load_data(datapath,extention=False,article="total"):
     with open(datapath, "rb") as f:
@@ -8,35 +9,59 @@ def load_data(datapath,extention=False,article="total"):
     if article == "total":
         if extention == "tokens":
             data = list(df["tokens"])
-            return data, df
+            return [(data, df)]
         elif extention == "topics":
             data = list(df["topic_distribution"])
             data = [[y[1] for y in x] for x in data]
-            return data, df
+            return [(data, df)]
         else:
-            return df
+            return [df]
     elif article=="one_article":
         ID = df["articleID"][0]
         df = df[df["articleID"]==ID]
         if extention == "tokens":
             data = df["tokens"]
-            return data, df
+            return [(data, df)]
         elif extention == "topics":
             data = list(df["topic_distribution"])
             data = [[y[1] for y in x] for x in data]
-            return data, df
+            return [(data, df)]
         else:
-            return df
+            return [df]
+    elif article=="total_one_article":
+        ids = list(df['articleID'].unique())
+        dfs = []
+        for i in ids:
+            # d = df[df["articleID"]==i]
+            d = pd.DataFrame(df.loc[df["articleID"]==i])
+            if extention == "tokens":
+                data = d["tokens"]
+                dfs.append((data, d))
+                # return data, df
+            elif extention == "topics":
+                data = list(d["topic_distribution"])
+                data = [[y[1] for y in x] for x in data]
+                # return data, df
+                dfs.append((data, d))
+            else:
+                dfs.append(d)
+                # return df
+        return dfs
 
-def check_print(i):
-    if i%1000==0:
-        print(i)
+def check_print(i,step=1000,time=False):
+    if i%step==0:
+        if time:
+            print(i," time(min): ",(tm()-time)/60)
+        else:
+            print(i)
 
 def save_data(datapath, data):
+    # print(data["topic_distribution"])
     with open(datapath, "wb") as f:
         pickle.dump(data, f)
 
-def embs(data, emb_path):
+def embs(df, emb_path):
+    data = list(df["tokens"])
     emb_matrix = load_emb_matrix(emb_path)
     w2i = word2idx(data)
     emb = []
@@ -58,7 +83,8 @@ def embs(data, emb_path):
                     ll.append(np.array(emb_matrix[y]))
         emb.insert(-1,np.array(np.mean(ll, axis=0)))
     print(np.shape(emb))
-    return emb
+    df["emb"]=[e for e in emb]
+    return emb , df
 
 def load_emb_matrix(emb_path):
     with open(emb_path, "rb") as f:

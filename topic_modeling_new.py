@@ -1,17 +1,33 @@
 import os
 from gensim.corpora.dictionary import Dictionary
 from gensim.models import LdaMulticore
+from gensim.models.ldamodel import  LdaModel
 from utils_funcs.utils import *
+from gensim.models import CoherenceModel
 
 def lda_model(confiq,common_texts,limit):
     # common_texts=common_texts[:100]
     common_dictionary = Dictionary(common_texts)
-    common_dictionary.filter_extremes(no_below=1, no_above=limit)
+    # common_dictionary.filter_extremes(no_below=1, no_above=limit)
     common_corpus = [common_dictionary.doc2bow(text) for text in common_texts]
-    lda = LdaMulticore(corpus=common_corpus, num_topics=confiq["num_topics"],
-                       id2word=common_dictionary, workers=confiq["num_cores"],
-                       alpha=confiq["alpha"], eta=confiq["eta"],
-                       minimum_probability=confiq["minimum_probability"])
+    # lda = LdaMulticore(corpus=common_corpus, num_topics=confiq["num_topics"],
+    #                    id2word=common_dictionary, workers=confiq["num_cores"],
+    #                    alpha=confiq["alpha"], eta=confiq["eta"],
+    #                    minimum_probability=confiq["minimum_probability"])
+
+    lda = LdaMulticore( corpus=common_corpus,
+                        num_topics=confiq["num_topics"],
+                        id2word=common_dictionary,
+                        random_state=100,
+                        # update_every=1,
+                        chunksize=100,
+                        passes=10,
+                        alpha=1/confiq["num_topics"],
+                        per_word_topics=True,
+                       # workers=confiq["num_cores"]
+                       # alpha=confiq["alpha"], eta=confiq["eta"],
+                       # minimum_probability=confiq["minimum_probability"])
+                       )
     return lda , common_corpus , common_dictionary
 
 def prepare_result(lda, df, common_corpus, num_topics,c):

@@ -6,3 +6,7 @@ __pycache__/*
 report
 backup
 related_documents
+utils_funcs/__pycache__
+TOPIC MODELING
+results.xlsx
+test.net
