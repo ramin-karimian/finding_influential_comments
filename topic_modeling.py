@@ -6,7 +6,7 @@ from utils_funcs.utils import *
 def lda_model(confiq,common_texts,limit):
     # common_texts=common_texts[:100]
     common_dictionary = Dictionary(common_texts)
-    common_dictionary.filter_extremes(no_below=1, no_above=limit)
+    # common_dictionary.filter_extremes(no_below=1, no_above=limit)
     common_corpus = [common_dictionary.doc2bow(text) for text in common_texts]
     lda = LdaMulticore(corpus=common_corpus, num_topics=confiq["num_topics"],
                        id2word=common_dictionary, workers=confiq["num_cores"],
@@ -50,7 +50,8 @@ if __name__=="__main__":
     confiq={"num_topics":6,
         "oneOrTotal" : ["one_article","total","total_one_article"][0],
         "num_cores":5,
-        "alpha":1e-5,
+        # "alpha":1e-5,
+        "alpha":1/6,
         "eta":5e-1,
         "minimum_probability":0.0,
         "num_words":40,

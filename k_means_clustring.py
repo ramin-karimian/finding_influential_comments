@@ -23,6 +23,7 @@ if __name__=="__main__":
     artId = f"451560ec-e0ff-5977-955c-e52c34e85d80"
     datapath = f"models/{modelName}/{artId}/{modelName}_({artId}).pkl"
     data, df_total = load_data(datapath,extention = "topics",article=oneOrTotal)[0]
+    # data, errlist = load_data(datapath,extention = "topics",article=oneOrTotal)[0]
 
     # datapath=f"models/{modelName}/{modelName}.pkl"
     # data = load_data(datapath)[0]

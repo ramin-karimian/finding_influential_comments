@@ -2,19 +2,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 from utils_funcs.utils import *
 import os
 
-def similarity1(data):
-    dic={}
-    for i in range(len(data)):
-        print(i)
-        for j in range(i-1,len(data)):
-            sim = cosine_similarity(data[i][1],data[j][1])
-            if i not in dic.keys():
-                dic[i]={}
-            if j not in dic.keys():
-                dic[j]={}
-            dic[i][j]=sim
-            dic[j][i]=sim
-    return dic
 
 def similarity(data):
     sims = cosine_similarity([x[1][0] for x in data],[x[1][0] for x in data])

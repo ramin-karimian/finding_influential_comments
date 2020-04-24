@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b0aab86-7ebd-4d13-9ec0-8c5ccce8b09f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/metro_data.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/metro_data.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k_means_clustring.py" beforeDir="false" afterPath="$PROJECT_DIR$/k_means_clustring.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/similarity_ESA.py" beforeDir="false" afterPath="$PROJECT_DIR$/similarity_ESA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/similarity_topic_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/similarity_topic_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/similarity_word2vec.py" beforeDir="false" afterPath="$PROJECT_DIR$/similarity_word2vec.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/topic_modeling.py" beforeDir="false" afterPath="$PROJECT_DIR$/topic_modeling.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils_funcs/create_net_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils_funcs/create_net_file.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils_funcs/create_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils_funcs/create_network.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils_funcs/modify.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils_funcs/modify.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils_funcs/multi_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils_funcs/multi_processing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils_funcs/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils_funcs/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,8 +36,10 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\RAKA\Documents\metro_data\backup\scripts" />
       <recent name="C:\Users\RAKA\Documents\metro_data\data\source_data" />
+      <recent name="C:\Users\RAKA\Documents\metro_data" />
+      <recent name="C:\Users\RAKA\Documents\metro_data\data" />
+      <recent name="C:\Users\RAKA\Documents\metro_data\backup\scripts" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\RAKA\Documents\metro_data" />
@@ -60,8 +59,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.similarity_ESA">
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.NN_model">
+    <configuration name="NN_model" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="metro_data" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -73,7 +72,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NN_model.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -82,25 +81,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="similarity_ESA" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="metro_data" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/similarity_ESA.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="similarity_topic_model" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="SVM_model" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="metro_data" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -112,7 +93,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/similarity_topic_model.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SVM_model.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SVM_utils" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="metro_data" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils_funcs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils_funcs/SVM_utils.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -165,11 +167,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.similarity_ESA" />
-        <item itemvalue="Python.similarity_ESA" />
-        <item itemvalue="Python.similarity_ESA" />
-        <item itemvalue="Python.main" />
-        <item itemvalue="Python.similarity_ESA" />
+        <item itemvalue="Python.NN_model" />
+        <item itemvalue="Python.NN_model" />
+        <item itemvalue="Python.NN_model" />
+        <item itemvalue="Python.NN_model" />
+        <item itemvalue="Python.NN_model" />
       </list>
     </recent_temporary>
   </component>
